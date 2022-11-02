@@ -10478,7 +10478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93672499c703fd642a8fc649468e556d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _houseActiveController: {fileID: 561756834}
-  _alarmSound: {fileID: 0}
+  _activeController: {fileID: 561756834}
+  _alarmSound: {fileID: 2104835252}
   _maxVolume: 1
   _speedVolumeChange: 0.7

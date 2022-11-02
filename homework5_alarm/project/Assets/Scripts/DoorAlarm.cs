@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class Alarm : MonoBehaviour
+public class DoorAlarm : MonoBehaviour
 {
-    [SerializeField] private ActiveController _houseActiveController;
+    [SerializeField] private ActiveController _activeController;
     [SerializeField] private AudioSource _alarmSound;
     [SerializeField] private float _maxVolume = 1.0f;
     [SerializeField] private float _speedVolumeChange = 0.7f;
@@ -26,14 +26,14 @@ public class Alarm : MonoBehaviour
 
     private void OnEnable()
     {
-        _houseActiveController.Enabled += StopAlarm;
-        _houseActiveController.Disabled += StartAlarm;
+        _activeController.Enabled += StopAlarm;
+        _activeController.Disabled += StartAlarm;
     }
 
     private void OnDisable()
     {
-        _houseActiveController.Enabled -= StopAlarm;
-        _houseActiveController.Disabled -= StartAlarm;
+        _activeController.Enabled -= StopAlarm;
+        _activeController.Disabled -= StartAlarm;
     }
 
     private void StartAlarm()
