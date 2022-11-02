@@ -23,8 +23,8 @@ public class Alarm : MonoBehaviour
         _alarmSound.loop = true;
         _maxVolume = Mathf.Clamp(_maxVolume, 0f, 1f);
 
-        _houseActiveController.IsEnable += StopAlarm;
-        _houseActiveController.IsDisable += StartAlarm;
+        _houseActiveController.Enabled += StopAlarm;
+        _houseActiveController.Disabled += StartAlarm;
     }
 
     private void StartAlarm()

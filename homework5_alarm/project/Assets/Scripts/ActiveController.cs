@@ -5,30 +5,30 @@ using UnityEngine.Events;
 
 public class ActiveController : MonoBehaviour
 {
-    private UnityEvent _isEnable = new UnityEvent();
-    private UnityEvent _isDisable = new UnityEvent();
+    private UnityEvent _enabled = new UnityEvent();
+    private UnityEvent _disabled = new UnityEvent();
 
-    public event UnityAction IsEnable
+    public event UnityAction Enabled
     {
-        add { _isEnable.AddListener(value); }
-        remove { _isEnable.RemoveListener(value); }
+        add { _enabled.AddListener(value); }
+        remove { _enabled.RemoveListener(value); }
     }
 
-    public event UnityAction IsDisable
+    public event UnityAction Disabled
     {
-        add { _isDisable.AddListener(value); }
-        remove { _isDisable.RemoveListener(value); }
+        add { _disabled.AddListener(value); }
+        remove { _disabled.RemoveListener(value); }
     }
 
     public void Enable()
     {
         gameObject.SetActive(true);
-        _isEnable.Invoke();
+        _enabled.Invoke();
     }
 
     public void Disable()
     {
         gameObject.SetActive(false);
-        _isDisable.Invoke();
+        _disabled.Invoke();
     }
 }

@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17a70764b85e704187aefaa82fa5bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isEntered:
+  _entered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 561756834}
@@ -9504,7 +9504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17a70764b85e704187aefaa82fa5bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isEntered:
+  _entered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 561756834}

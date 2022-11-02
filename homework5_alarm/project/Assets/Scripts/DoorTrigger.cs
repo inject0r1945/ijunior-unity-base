@@ -5,21 +5,21 @@ using UnityEngine.Events;
 
 public class DoorTrigger : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _isEntered;
+    [SerializeField] private UnityEvent _entered;
 
     private bool _isPlayerEntered;
 
     public bool IsPlayerEntered => _isPlayerEntered;
 
-    public event UnityAction IsEntered
+    public event UnityAction Entered
     {
-        add { _isEntered.AddListener(value); }
-        remove { _isEntered.RemoveListener(value); }
+        add { _entered.AddListener(value); }
+        remove { _entered.RemoveListener(value); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _isEntered.Invoke();
+        _entered.Invoke();
 
         if (collision.TryGetComponent<Player>(out Player player))
             _isPlayerEntered = true;
