@@ -38,30 +38,30 @@ public class DoorAlarm : MonoBehaviour
 
     private void StartAlarm()
     {
-        foreach (DoorTrigger doorTrigger in _doorTriggers)
-        {
-            if (doorTrigger.IsPlayerEntered && _currentVolume < _maxVolume)
-            {
-                if (_changeAlarmVolumeCoroutine is not null)
-                    StopCoroutine(_changeAlarmVolumeCoroutine);
-
-                _changeAlarmVolumeCoroutine = StartCoroutine(ChangeAlarmVolume(_maxVolume));
-
-                break;
-            }  
-        }
+        bool isStopAction = false;
+        ManupulateAlarm(isStopAction);
     }
 
     private void StopAlarm()
     {
+        bool isStopAction = true;
+        ManupulateAlarm(isStopAction);
+    }
+
+    private void ManupulateAlarm(bool isStopAction)
+    {
+        float _targetVolume = (isStopAction) ? _minVolume : _maxVolume;
+
         foreach (DoorTrigger doorTrigger in _doorTriggers)
         {
-            if (doorTrigger.IsPlayerEntered && _currentVolume > _minVolume)
+            bool isRequiredVolume = (isStopAction) ? _currentVolume < _minVolume : _currentVolume > _minVolume;
+
+            if (doorTrigger.IsPlayerEntered && !isRequiredVolume)
             {
                 if (_changeAlarmVolumeCoroutine is not null)
                     StopCoroutine(_changeAlarmVolumeCoroutine);
 
-                _changeAlarmVolumeCoroutine = StartCoroutine(ChangeAlarmVolume(_minVolume));
+                _changeAlarmVolumeCoroutine = StartCoroutine(ChangeAlarmVolume(_targetVolume));
 
                 break;
             }
