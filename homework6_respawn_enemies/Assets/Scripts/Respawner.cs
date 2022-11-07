@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RespawnEnemies : MonoBehaviour
+public class Respawner : MonoBehaviour
 {
     [SerializeField] private Enemy _templateEnemy;
     [SerializeField] private float _speed = 1f;
@@ -29,13 +29,16 @@ public class RespawnEnemies : MonoBehaviour
     {
         bool isEnd = false;
         int currentRespawnPointNumber = 0;
+        var waitForSpeedSeconds = new WaitForSeconds(_speed);
+
 
         while (isEnd == false)
         {
             Transform respawnPoint = _respawnPoints[currentRespawnPointNumber];
-            Enemy newObject = Instantiate(_templateEnemy, respawnPoint.position, Quaternion.identity);
+            Enemy newObject = Instantiate(_templateEnemy, 
+                respawnPoint.position, Quaternion.identity);
 
-            yield return new WaitForSeconds(_speed);
+            yield return waitForSpeedSeconds;
 
             currentRespawnPointNumber++;
 

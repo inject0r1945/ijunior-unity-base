@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private float _rotationMax = 20f;
+    private readonly string _animatorGroundParameterName = "IsGround";
+    private int _animatorGroundParameterHash;
 
     private int WalkDirection => (_spriteRenderer.flipX == true) ? 1 : -1;
 
@@ -42,6 +44,8 @@ public class Enemy : MonoBehaviour
             throw new System.Exception("Не найден сенсор земли");
 
         _rigidBody = GetComponent<Rigidbody2D>();
+
+        _animatorGroundParameterHash = Animator.StringToHash(_animatorGroundParameterName);
     }
 
     private void Start()
@@ -74,7 +78,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         transform.Translate(_speed * Time.deltaTime * WalkDirection, 0, 0);
-        _animator.SetBool("IsGround", _groundSensor.IsColissionExist);
+        _animator.SetBool(_animatorGroundParameterHash, _groundSensor.IsColissionExist);
     }
 
     private void OnWallDetect()
