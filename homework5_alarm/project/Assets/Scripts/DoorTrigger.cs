@@ -20,10 +20,6 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _entered.Invoke();
-
-        if (collision.TryGetComponent<Player>(out Player player))
-            _isPlayerEntered = true;
-        else
-            _isPlayerEntered = false;
+        _isPlayerEntered = collision.TryGetComponent<Player>(out Player player);
     }
 }

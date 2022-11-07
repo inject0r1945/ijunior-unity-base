@@ -13,13 +13,17 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Movement _movement;
     private bool _isGrounded;
+    private readonly string _animatorStateName = "State";
+    private int _animatorStateHash;
+    private readonly string _animatorAirSpeedName = "AirSpeedY";
+    private int _animatorAirSpeedHash;
 
     public bool IsGrounded => _isGrounded;
 
     private States AnimationState
     {
-        get { return (States)_animator.GetInteger("State"); }
-        set { _animator.SetInteger("State", (int)value); }
+        get { return (States)_animator.GetInteger(_animatorStateHash); }
+        set { _animator.SetInteger(_animatorStateHash, (int)value); }
     }
 
     private void Awake()
@@ -28,6 +32,8 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _movement = GetComponent<Movement>();
+        _animatorStateHash = Animator.StringToHash(_animatorStateName);
+        _animatorAirSpeedHash = Animator.StringToHash(_animatorAirSpeedName);
     }
 
     private void FixedUpdate()
@@ -45,9 +51,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("AirSpeedY", _rigidbody.velocity.y);
+        _animator.SetFloat(_animatorAirSpeedHash, _rigidbody.velocity.y);
         AnimationState = _movement.CurrentState;
-        _spriteRenderer.flipX = (_movement.CurrentDirection == Directions.Forward) ? false : true;
+        _spriteRenderer.flipX = !(_movement.CurrentDirection == Directions.Forward);
     }
 }
 

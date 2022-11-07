@@ -6,12 +6,6 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _player;
 
-    private void Awake()
-    {
-        if (_player == null)
-            _player = FindObjectOfType<Player>().transform;
-    }
-
     private void Update()
     {
         Vector3 target_position = _player.position;
