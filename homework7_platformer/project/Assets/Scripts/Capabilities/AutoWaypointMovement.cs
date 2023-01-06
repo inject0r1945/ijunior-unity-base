@@ -20,7 +20,7 @@ public class AutoWaypointMovement : MonoBehaviour
 
     private void Awake()
     {
-        _startingPosition = GetComponent<Transform>().position;
+        _startingPosition = transform.position;
         _step = Vector3.zero;
 
         if (_isHorizontal)

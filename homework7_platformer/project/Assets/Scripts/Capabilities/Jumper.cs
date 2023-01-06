@@ -6,7 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CollisionsDataRetriever))]
 [RequireComponent(typeof(Controller))]
-public class Jump : MonoBehaviour
+public class Jumper: MonoBehaviour
 {
     [SerializeField] private float _jumpHeight = 3f;
     [SerializeField] private float _upwardMovementMultiplier = 3f;
@@ -21,7 +21,7 @@ public class Jump : MonoBehaviour
     private float _zeroSpeedThreshold = 0.02f;
     private bool _onGround;
     private float _defaultGravityScale;
-    private Vector2 _velocity;
+    private Vector2 _velocityCache;
     private int _jumpPhase;
     private bool _isDesiredJump;
     private bool _isProcessJumping;
@@ -61,7 +61,7 @@ public class Jump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _velocity = _rigidbody.velocity;
+        _velocityCache = _rigidbody.velocity;
 
         if (_onGround && Mathf.Abs(_rigidbody.velocity.y) <= _zeroSpeedThreshold)
         {
@@ -86,7 +86,7 @@ public class Jump : MonoBehaviour
 
         if (_jumpBufferCounter > 0)
         {
-            CalculateJump();
+            AddJumpToVelocityCache();
         }
 
         bool isJumpHold = _controller.Input.RetrieveJumpHoldInput();
@@ -100,10 +100,10 @@ public class Jump : MonoBehaviour
         else
             _rigidbody.gravityScale = _defaultGravityScale;
 
-        _rigidbody.velocity = _velocity;
+        _rigidbody.velocity = _velocityCache;
     }
 
-    private void CalculateJump()
+    private void AddJumpToVelocityCache()
     {
         if (_coyoteCounter > 0f || (_jumpPhase < _maxAirJumps && _isProcessJumping))
         {
@@ -116,7 +116,7 @@ public class Jump : MonoBehaviour
             float jumpSpeed = Mathf.Sqrt(jumpSpeedCoefficient * Physics2D.gravity.y * _jumpHeight);
             _isProcessJumping = true;
 
-            _velocity.y = jumpSpeed;
+            _velocityCache.y = jumpSpeed;
 
             _madeJump.Invoke();
         }

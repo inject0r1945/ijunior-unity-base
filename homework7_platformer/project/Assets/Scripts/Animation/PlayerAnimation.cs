@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Controller))]
-[RequireComponent(typeof(Jump))]
+[RequireComponent(typeof(Jumper))]
 [RequireComponent(typeof(CollisionsDataRetriever))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerHealth))]
@@ -14,7 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Controller _controller;
-    private Jump _jump;
+    private Jumper _jumper;
     private CollisionsDataRetriever _collisionsDataRetriever;
     private Rigidbody2D _rigidbody;
     private PlayerHealth _playerHealth;
@@ -42,7 +42,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _controller = GetComponent<Controller>();
-        _jump = GetComponent<Jump>();
+        _jumper = GetComponent<Jumper>();
         _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerHealth = GetComponent<PlayerHealth>();
@@ -57,14 +57,14 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        _jump.MadeJump += OnJumpMade;
+        _jumper.MadeJump += OnJumpMade;
         _playerHealth.TookDamage += OnTookDamage;
         _playerHealth.PlayerDied += OnPlayerDied;
     }
 
     private void OnDisable()
     {
-        _jump.MadeJump -= OnJumpMade;
+        _jumper.MadeJump -= OnJumpMade;
         _playerHealth.TookDamage -= OnTookDamage;
         _playerHealth.PlayerDied -= OnPlayerDied;
     }
@@ -88,7 +88,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         _animator.SetInteger(_animatorStateName, (int)AnimationState.Jump);
 
-        if (_jump.JumpPhase > 0 && !_collisionsDataRetriever.OnWall)
+        if (_jumper.JumpPhase > 0 && !_collisionsDataRetriever.OnWall)
             _animator.SetTrigger(_animatorDoubleJumpTriggerHash);
     }
 
