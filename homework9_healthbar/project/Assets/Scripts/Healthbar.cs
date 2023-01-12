@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour
 {
     [SerializeField, Range(0, 1)] private float _animationSpeed = 0.25f;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     private HealthLevel _healthLevel;
     private Image _healthLevelImage;
@@ -24,17 +25,24 @@ public class Healthbar : MonoBehaviour
             throw new System.Exception("Не удалось найти компонент Image у объекта HealthLevel");
     }
 
-    public void Init(float normalizedHealthLevel)
+    private void OnEnable()
     {
-        _healthLevelImage.fillAmount = normalizedHealthLevel;
+        _playerHealth.HealthChanged += SetHealthLevel;
     }
 
-    public void SetHealthLevel(float targetNormalizedHealthLevel)
+    private void OnDisable()
+    {
+        _playerHealth.HealthChanged -= SetHealthLevel;
+    }
+
+    public void SetHealthLevel(int health, int maxHealth)
     {
         if (_healthLevelAnimationEnumerator != null)
             StopCoroutine(_healthLevelAnimationEnumerator);
 
-        _healthLevelAnimationEnumerator = StartHealthChangeAnimation(targetNormalizedHealthLevel);
+        float normalizedHealth = (float)health / maxHealth;
+
+        _healthLevelAnimationEnumerator = StartHealthChangeAnimation(normalizedHealth);
         StartCoroutine(_healthLevelAnimationEnumerator);
     }
 

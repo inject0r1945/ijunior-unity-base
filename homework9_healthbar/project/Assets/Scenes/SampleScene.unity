@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationSpeed: 0.25
+  _playerHealth: {fileID: 1315335197}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,11 +1349,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1315335197}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: TakeDamage
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1522,11 +1523,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1315335197}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: Heal
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

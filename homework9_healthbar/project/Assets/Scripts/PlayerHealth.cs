@@ -1,42 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField, Range(0, 100)] private int _health = 100;
-    [SerializeField, Range(0, 100)] private int _damageSize = 10;
-    [SerializeField, Range(0, 100)] private int _healingSize = 10;
-    [SerializeField] private Healthbar _healthbar;
+    
+    private int _maxHealth;
 
-    private int _maxHealth = 100;
+    public event UnityAction<int, int> HealthChanged;
 
-    public float NormalizedHealth => (float)_health / _maxHealth;
 
     private void Start()
     {
-        _healthbar.Init(NormalizedHealth);
+        _maxHealth = _health;
+        HealthChanged.Invoke(_health, _maxHealth);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        AddHealthDelta(-_damageSize);
+        AddHealthDelta(-damage);
     }
 
-    public void Heal()
+    public void Heal(int healingSize)
     {
-        AddHealthDelta(_healingSize);
+        AddHealthDelta(healingSize);
     }
 
     private void AddHealthDelta(int healthDelta)
     {
         _health += healthDelta;
+        _health = Mathf.Clamp(_health, 0, _maxHealth);
 
-        if (_health > _maxHealth)
-            _health = _maxHealth;
-        else if (_health < 0)
-            _health = 0;
-
-        _healthbar.SetHealthLevel(NormalizedHealth);
+        HealthChanged.Invoke(_health, _maxHealth);
     }
 }
