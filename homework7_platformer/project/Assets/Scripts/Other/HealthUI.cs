@@ -24,10 +24,9 @@ public class HealthUI : MonoBehaviour
         {
             Image currentHealthIcon = _healthIcons[healthIconIndex];
 
-            if (healthIconIndex < playerHealth.Health)
-                currentHealthIcon.gameObject.SetActive(true);
-            else
-                currentHealthIcon.gameObject.SetActive(false);
+            bool IsActiveHealthIcon = healthIconIndex < playerHealth.Health;
+
+            currentHealthIcon.gameObject.SetActive(IsActiveHealthIcon);
         }
     }
 }

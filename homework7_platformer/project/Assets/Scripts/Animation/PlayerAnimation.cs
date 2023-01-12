@@ -135,10 +135,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void CalculateJumpWallAnimation()
     {
-        if (_collisionsDataRetriever.OnWall && !_collisionsDataRetriever.OnGround)
-            _animator.SetBool(_animatorBoolWallHash, true);
-        else
-            _animator.SetBool(_animatorBoolWallHash, false);
+        bool isEnableWallAnimation = _collisionsDataRetriever.OnWall && !_collisionsDataRetriever.OnGround;
+        _animator.SetBool(_animatorBoolWallHash, isEnableWallAnimation);
     }
 
     private void CalculateJumpAnimation()

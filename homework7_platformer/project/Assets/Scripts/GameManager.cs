@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] PlayerHealth _playerHealth;
+    [SerializeField] Movement _playerMovement;
+    [SerializeField] Rigidbody2D _playerRigidbody;
     [SerializeField] private CheckpointsManager _checkpointsManager;
 
     [Header("Audios")]
@@ -16,16 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas _finishCanvas;
     [SerializeField] private Canvas _dieCanvas;
     
-
-    private Movement _playerMovement;
-    private Rigidbody2D _playerRigidbody;
     private bool _islevelCompleted;
-
-    private void Awake()
-    {
-        _playerMovement = _playerHealth.transform.GetComponent<Movement>();
-        _playerRigidbody = _playerHealth.transform.GetComponent<Rigidbody2D>();
-    }
 
     private void Start()
     {

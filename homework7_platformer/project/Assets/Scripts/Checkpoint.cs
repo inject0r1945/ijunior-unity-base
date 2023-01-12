@@ -28,9 +28,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player = collision.transform.GetComponent<Player>();
-
-        if (player)
+        if (collision.transform.TryGetComponent<Player>(out Player player))
         {
             _animator?.SetTrigger(_reachedTriggerHash);
             _isReached = true;
