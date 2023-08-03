@@ -5,4 +5,4 @@
 Подобная механика есть в Tower Defense играх, в которых враги создаются в разных точках идут к игроку по разным дорогам.
 
 Демонстрация результата:
-https://www.youtube.com/watch?v=PUgRnN2tGi8
+https://www.youtube.com/watch?v=-oHoK7bQayo
