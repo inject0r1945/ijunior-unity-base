@@ -18,10 +18,10 @@ public class Shooter : MonoBehaviour
     private IEnumerator Shoot()
     {
         bool isEnabledComponent = enabled;
-        var waitForSeconds = new WaitForSeconds(_pauseBetweenShots);
-        Rigidbody bulletRigidbody;
         Vector3 shootingDirection;
         GameObject bullet;
+        Rigidbody bulletRigidbody;
+        var waitForSeconds = new WaitForSeconds(_pauseBetweenShots);
 
         while (isEnabledComponent)
         {
