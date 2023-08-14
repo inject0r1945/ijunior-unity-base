@@ -42,7 +42,7 @@ public class PointsPatrol : MonoBehaviour
             _patrolPoints[i] = _pointsParent.GetChild(i).GetComponent<Transform>();
     }
 
-    public void CalculateNextPatrolPointIndex()
+    private void CalculateNextPatrolPointIndex()
     {
         _patrolPointIndex++;
 
