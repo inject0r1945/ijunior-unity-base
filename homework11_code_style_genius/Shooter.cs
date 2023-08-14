@@ -8,7 +8,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _pauseBetweenShots;
-    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Bullet _bulletPrefab;
 
     private void Start() 
     {
@@ -19,7 +19,7 @@ public class Shooter : MonoBehaviour
     {
         bool isEnabledComponent = enabled;
         Vector3 shootingDirection;
-        GameObject bullet;
+        Bullet bullet;
         Rigidbody bulletRigidbody;
         var waitForSeconds = new WaitForSeconds(_pauseBetweenShots);
 
