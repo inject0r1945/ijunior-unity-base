@@ -20,6 +20,14 @@ public class PointsPatrol : MonoBehaviour
     {
         StartPatrolBehaviour();
     }
+    
+    private void InitializePatrolPoints()
+    {
+        _patrolPoints = new Transform[_pointsParent.childCount];
+
+        for (int i = 0; i < _pointsParent.childCount; i++)
+            _patrolPoints[i] = _pointsParent.GetChild(i).GetComponent<Transform>();
+    }
 
     private void StartPatrolBehaviour()
     {
@@ -33,15 +41,7 @@ public class PointsPatrol : MonoBehaviour
             RotateToDestination();
         }
     }
-
-    private void InitializePatrolPoints()
-    {
-        _patrolPoints = new Transform[_pointsParent.childCount];
-
-        for (int i = 0; i < _pointsParent.childCount; i++)
-            _patrolPoints[i] = _pointsParent.GetChild(i).GetComponent<Transform>();
-    }
-
+    
     private void CalculateNextPatrolPointIndex()
     {
         _patrolPointIndex++;
