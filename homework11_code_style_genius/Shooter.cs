@@ -32,6 +32,8 @@ public class Shooter : MonoBehaviour
 
             bulletRigidbody.transform.up = shootingDirection;
             bulletRigidbody.velocity = shootingDirection * _bulletSpeed;
+            
+            isEnabledComponent = enabled;
 
             yield return waitForSeconds;
          }
