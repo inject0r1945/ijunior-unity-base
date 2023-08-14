@@ -13,7 +13,7 @@ public class PointsPatrol : MonoBehaviour
 
     private void Start()
     {
-        InitializePatrolPointsArray();
+        InitializePatrolPoints();
     }
 
     private void Update()
@@ -34,7 +34,7 @@ public class PointsPatrol : MonoBehaviour
         }
     }
 
-    private void InitializePatrolPointsArray()
+    private void InitializePatrolPoints()
     {
         _patrolPoints = new Transform[_pointsParent.childCount];
 
