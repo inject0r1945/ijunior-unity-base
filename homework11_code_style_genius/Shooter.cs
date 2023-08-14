@@ -10,7 +10,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float _pauseBetweenShots;
     [SerializeField] private GameObject _bulletPrefab;
 
-    void Start() 
+    private void Start() 
     {
         StartCoroutine(nameof(Shoot));
     }
