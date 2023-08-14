@@ -18,6 +18,11 @@ public class PointsPatrol : MonoBehaviour
 
     private void Update()
     {
+        StartPatrolBehaviour();
+    }
+
+    private void StartPatrolBehaviour()
+    {
         _destinationPatrolPoint = _patrolPoints[_patrolPointIndex];
 
         transform.position = Vector3.MoveTowards(transform.position, _destinationPatrolPoint.position, _moveSpeed * Time.deltaTime);
