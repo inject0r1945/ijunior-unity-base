@@ -19,13 +19,16 @@ public class Shooter : MonoBehaviour
     {
         bool isEnabledComponent = enabled;
         var waitForSeconds = new WaitForSeconds(_pauseBetweenShots);
+        Rigidbody bulletRigidbody;
+        Vector3 shootingDirection;
+        GameObject bullet;
 
         while (isEnabledComponent)
         {
-            Vector3 shootingDirection = (_target.position - transform.position).normalized;
-            GameObject bullet = Instantiate(_bulletPrefab, transform.position + shootingDirection, Quaternion.identity);
+            shootingDirection = (_target.position - transform.position).normalized;
+            bullet = Instantiate(_bulletPrefab, transform.position + shootingDirection, Quaternion.identity);
 
-            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+            bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
             bulletRigidbody.transform.up = shootingDirection;
             bulletRigidbody.velocity = shootingDirection * _bulletSpeed;
