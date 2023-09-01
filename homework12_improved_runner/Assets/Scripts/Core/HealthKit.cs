@@ -12,9 +12,13 @@ public class HealthKit : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Player player))
         {
-            player.Heal(this);
-
-            Destroy(gameObject);
+            Use(player);
         }
+    }
+
+    private void Use(Player player)
+    {
+        player.Heal(this);
+        gameObject.SetActive(false);
     }
 }
