@@ -6,28 +6,32 @@ public class Spawner : ObjectPool
 {
     [SerializeField] private GameObject _objectPrefab;
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private float _secondsBetweenSpawn;
+    [SerializeField] private float _delay;
 
-    private float _elapsedTime = 0;
     private Transform _spawnPoint;
 
     private void Start()
     {
         Initialize(_objectPrefab);
+        StartCoroutine(StartSpawnProcess());
     }
 
-    private void Update()
+    private IEnumerator StartSpawnProcess()
     {
-        _elapsedTime += Time.deltaTime;
+        var waitForSeconds = new WaitForSeconds(_delay);
+        bool isEnd = false;
 
-        if (_elapsedTime >= _secondsBetweenSpawn && TryGetObject(out GameObject spawnedObject))
+        while (!isEnd)
         {
-            _elapsedTime = 0;
+            if (TryGetObject(out GameObject spawnedObject))
+            {
+                int spawnPointNumber = Random.Range(0, _spawnPoints.Length);
+                _spawnPoint = _spawnPoints[spawnPointNumber];
 
-            int spawnPointNumber = Random.Range(0, _spawnPoints.Length);
-            _spawnPoint = _spawnPoints[spawnPointNumber];
+                SetSpawnedObject(spawnedObject, _spawnPoint.position);
+            }
 
-            SetSpawnedObject(spawnedObject, _spawnPoint.position);
+            yield return waitForSeconds;
         }
     }
 

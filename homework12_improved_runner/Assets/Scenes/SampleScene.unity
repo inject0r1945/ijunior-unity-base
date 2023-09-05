@@ -699,7 +699,7 @@ MonoBehaviour:
   - {fileID: 1945607906}
   - {fileID: 1605521535}
   - {fileID: 1246944433}
-  _secondsBetweenSpawn: 8
+  _delay: 8
 --- !u!4 &507064273
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   - {fileID: 1859784026}
   - {fileID: 1872021512}
   - {fileID: 929089827}
-  _secondsBetweenSpawn: 1.5
+  _delay: 2
 --- !u!4 &1056498649
 Transform:
   m_ObjectHideFlags: 0

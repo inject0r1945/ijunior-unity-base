@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class GameOverScript : MonoBehaviour
+public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _exitButton;
