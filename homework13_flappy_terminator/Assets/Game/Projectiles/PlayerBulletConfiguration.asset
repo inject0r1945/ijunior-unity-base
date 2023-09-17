@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515838f86adef6f4bb2a8a55873bf0cc, type: 3}
+  m_Name: PlayerBulletConfiguration
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 4769878257366379685, guid: e04f5155e4a7d2044b55810a40de7662, type: 3}
+  _speed: 3
