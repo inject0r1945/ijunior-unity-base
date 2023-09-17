@@ -43,10 +43,10 @@ public class Game : MonoBehaviour
 
     private void StartGame()
     {
-        Time.timeScale = 1;
         DestroyProjectiles();
         _playerController.Reset();
         _enemiesSpawner.ResetPool();
+        Time.timeScale = 1;
     }
 
     private void OnGameOver()
