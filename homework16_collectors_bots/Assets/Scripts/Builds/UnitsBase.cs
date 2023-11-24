@@ -28,12 +28,12 @@ namespace RTS.Builds
         private List<ResourceCollectorCar> _resourceCollectors = new List<ResourceCollectorCar>();
         private float _resourcesDetectionTimer;
         private Collider _collider;
-        private ResourcesStatistics _resourcesStatistict;
+        private ResourcesStatistics _resourcesStatistics;
 
         [Inject]
-        private void Construct(ResourcesStatistics resourcesStatistict)
+        private void Construct(ResourcesStatistics resourcesStatistics)
         {
-            _resourcesStatistict = resourcesStatistict;
+            _resourcesStatistics = resourcesStatistics;
         }
 
         private void Awake()
@@ -66,7 +66,7 @@ namespace RTS.Builds
 
         public void ReceiveResource(Resource resource)
         {
-            _resourcesStatistict.IncreaseResourceStatistic(resource);
+            _resourcesStatistics.IncreaseResourceStatistic(resource);
             Destroy(resource.gameObject);
         }
 

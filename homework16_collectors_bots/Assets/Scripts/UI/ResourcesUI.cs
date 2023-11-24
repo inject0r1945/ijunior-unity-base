@@ -6,31 +6,34 @@ using RTS.Builds;
 using Zenject;
 using RTS.Resources;
 
-public class ResourcesUI : MonoBehaviour
+namespace RTS.UI.Resources
 {
-    [SerializeField] private TMP_Text _detailsCountText;
-    [SerializeField] private UnitsBase _unitsBase;
-
-    private ResourcesStatistics _resourcesStatistict;
-
-    [Inject]
-    private void Construct(ResourcesStatistics resourcesStatistict)
+    public class ResourcesUI : MonoBehaviour
     {
-        _resourcesStatistict = resourcesStatistict;
-    }
+        [SerializeField] private TMP_Text _detailsCountText;
+        [SerializeField] private UnitsBase _unitsBase;
 
-    private void OnEnable()
-    {
-        _resourcesStatistict.DetailsChanged += OnDetailsChanged;
-    }
+        private ResourcesStatistics _resourcesStatistics;
 
-    private void OnDisable()
-    {
-        _resourcesStatistict.DetailsChanged -= OnDetailsChanged;
-    }
+        [Inject]
+        private void Construct(ResourcesStatistics resourcesStatistics)
+        {
+            _resourcesStatistics = resourcesStatistics;
+        }
 
-    private void OnDetailsChanged(int resourcesCount)
-    {
-        _detailsCountText.text = resourcesCount.ToString();
+        private void OnEnable()
+        {
+            _resourcesStatistics.DetailsChanged += OnDetailsChanged;
+        }
+
+        private void OnDisable()
+        {
+            _resourcesStatistics.DetailsChanged -= OnDetailsChanged;
+        }
+
+        private void OnDetailsChanged(int resourcesCount)
+        {
+            _detailsCountText.text = resourcesCount.ToString();
+        }
     }
 }
