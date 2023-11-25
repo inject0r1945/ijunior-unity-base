@@ -4,7 +4,7 @@ using RTS.Resources;
 namespace RTS.Units
 {
     [RequireComponent(typeof(Mover))]
-    public class ResourceCollectorCar : MonoBehaviour
+    public class ResourcesCollectorUnit : MonoBehaviour
     {
         [SerializeField] private Transform _resourcePoint;
 

@@ -10,22 +10,22 @@ namespace RTS.Builds
 {
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(BoxCollider))]
-    public class UnitsBase : MonoBehaviour, IResourceReceiver
+    public class ResourceBase : MonoBehaviour, IResourceReceiver
     {
-        [Header("REsource Collectors Settings")]
+        [Header("Resource Collectors Units Settings")]
         [SerializeField] private int _maxResourceCollectors = 10;
         [SerializeField] private int _startResourceCollectorsCount = 3;
-        [SerializeField] private ResourceCollectorCar _resourceCollectorPrefab;
+        [SerializeField] private ResourcesCollectorUnit _resourceCollectorPrefab;
         [SerializeField] private LayerMask _spawnerEnvironmentDetectionMask;
 
-        [Header("Resource Collector Settings")]
+        [Header("Resources Detector Settings")]
         [SerializeField] private float _resourcesDetectorRadius = 50f;
         [SerializeField] private float _resourceDetectionDelay = 1f;
         [SerializeField] private LayerMask _resourcesMask;
 
         private Vector3 _size;
         private Transform _transform;
-        private List<ResourceCollectorCar> _resourceCollectors = new List<ResourceCollectorCar>();
+        private List<ResourcesCollectorUnit> _resourcesCollectors = new List<ResourcesCollectorUnit>();
         private float _resourcesDetectionTimer;
         private Collider _collider;
         private ResourcesWarehouse _resourcesWarehouse;
@@ -74,9 +74,9 @@ namespace RTS.Builds
         {
             for (int i = 0; i < count; i++)
             {
-                ResourceCollectorCar unit = Instantiate(_resourceCollectorPrefab, GetAroundEmptyPositionAround(), MathUtils.GetRandomRotation(Vector3.up), _transform);
+                ResourcesCollectorUnit unit = Instantiate(_resourceCollectorPrefab, GetAroundEmptyPositionAround(), MathUtils.GetRandomRotation(Vector3.up), _transform);
                 unit.Initialize(_collider);
-                _resourceCollectors.Add(unit);
+                _resourcesCollectors.Add(unit);
             }
         }
 
@@ -136,7 +136,7 @@ namespace RTS.Builds
 
             while (isEnd == false)
             {
-                if (!TryGetFreeResourceCollector(out ResourceCollectorCar freeResourceCollector))
+                if (!TryGetFreeResourceCollector(out ResourcesCollectorUnit freeResourceCollector))
                 {
                     isEnd = true;
                     continue;
@@ -152,15 +152,15 @@ namespace RTS.Builds
             }
         }
 
-        private bool TryGetFreeResourceCollector(out ResourceCollectorCar resourceCollector)
+        private bool TryGetFreeResourceCollector(out ResourcesCollectorUnit resourceCollector)
         {
-            List<ResourceCollectorCar> freeREsourceCollector = _resourceCollectors.Where(unit => !unit.IsBusy).ToList();
+            List<ResourcesCollectorUnit> freeREsourceCollector = _resourcesCollectors.Where(unit => !unit.IsBusy).ToList();
             resourceCollector = freeREsourceCollector.FirstOrDefault();
 
             return resourceCollector != null;
         }
 
-        private Resource GetClosestResourceToREsourceCollector(ResourceCollectorCar resourceCollector, List<Resource> resources)
+        private Resource GetClosestResourceToREsourceCollector(ResourcesCollectorUnit resourceCollector, List<Resource> resources)
         {
             return resources.OrderBy(resource => Vector3.Distance(resource.transform.position, resourceCollector.transform.position)).FirstOrDefault();
         }
