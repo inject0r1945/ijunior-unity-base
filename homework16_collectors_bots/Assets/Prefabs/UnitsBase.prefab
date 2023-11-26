@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 307853540028563561}
   - component: {fileID: 8952208436551244746}
   - component: {fileID: 5634377931210090951}
+  - component: {fileID: 297780796359944417}
   m_Layer: 9
   m_Name: UnitsBase
   m_TagString: Untagged
@@ -210,7 +211,19 @@ MonoBehaviour:
   _spawnerEnvironmentDetectionMask:
     serializedVersion: 2
     m_Bits: 768
-  _resourcesDetectorRadius: 500
+--- !u!114 &297780796359944417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374909939664925271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad486a4b6ba4541bdef09604a25590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourcesDetectorRadius: 50
   _resourceDetectionDelay: 1
   _resourcesMask:
     serializedVersion: 2

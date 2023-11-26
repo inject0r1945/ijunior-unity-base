@@ -11,7 +11,7 @@ namespace RTS.UI.Resources
     public class ResourcesUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _detailsCountText;
-        [SerializeField] private ResourceBase _unitsBase;
+        [SerializeField] private ResourcesBase _unitsBase;
 
         private ResourcesWarehouse _warehouse;
 
