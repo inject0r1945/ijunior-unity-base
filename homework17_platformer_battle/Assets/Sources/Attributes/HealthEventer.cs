@@ -19,10 +19,13 @@ namespace Platformer.Attributes
 
         public UnityEvent<int> Changed;
 
-        private void OnEnable()
+        private void Awake()
         {
             ValidateInitialization();
+        }
 
+        private void OnEnable()
+        {
             _health.Died += OnDie;
             _health.Damaged += OnDamage;
             _health.Changed += OnChanged;
@@ -31,8 +34,6 @@ namespace Platformer.Attributes
 
         private void OnDisable()
         {
-            ValidateInitialization();
-
             _health.Died -= OnDie;
             _health.Damaged -= OnDamage;
             _health.Changed -= OnChanged;

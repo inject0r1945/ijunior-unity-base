@@ -14,6 +14,11 @@ namespace Platformer.Core
         private float _speedX;
         private bool _isInitialized;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void Update()
         {
             _speedX = _velocity.Velocity.x;

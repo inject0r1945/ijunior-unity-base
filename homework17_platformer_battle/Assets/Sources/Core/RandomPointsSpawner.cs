@@ -14,10 +14,13 @@ namespace Platformer.Core
         private List<Transform> _spawnPoints;
         private bool _isInitialized;
 
-        private void Start()
+        private void Awake()
         {
             ValidateInitialization();
+        }
 
+        private void Start()
+        {
             Spawn();
         }
 
@@ -70,6 +73,5 @@ namespace Platformer.Core
         {
             Instantiate(_prefab, transform.position, Quaternion.identity, transform);
         }
-
     }
 }

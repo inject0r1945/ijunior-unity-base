@@ -12,6 +12,11 @@ namespace Platformer.Capabilities
         private Vector2 _constraintedVelocity;
         private bool _isInitialized;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void FixedUpdate()
         {
             ValidateInitialization();

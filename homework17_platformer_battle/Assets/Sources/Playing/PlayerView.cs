@@ -28,6 +28,12 @@ namespace Platformer.Playing
         private int _hitTriggerHash;
 
         private Animator _animator;
+        private bool _isInitialized;
+
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
 
         public void Initialize()
         {
@@ -41,6 +47,8 @@ namespace Platformer.Playing
             _endDoubleJumpTriggerHash = Animator.StringToHash(_endDoubleJumpTrigger);
             _dieTriggerHash = Animator.StringToHash(_dieTrigger);
             _hitTriggerHash = Animator.StringToHash(_hitTrigger);
+
+            _isInitialized = true;
         }
 
         public void PlayIdleAnimation()
@@ -91,6 +99,12 @@ namespace Platformer.Playing
         public bool IsPlayedDieAnimation()
         {
             return _animator.IsPlayedAnimation(_dieAnimationName, _dieAnimationLayer, _dieTriggerHash);
+        }
+
+        private void ValidateInitialization()
+        {
+            if (_isInitialized == false)
+                throw new System.Exception($"{nameof(PlayerView)} is not initialized");
         }
 
         private void PlayAnimation(int animationHash)

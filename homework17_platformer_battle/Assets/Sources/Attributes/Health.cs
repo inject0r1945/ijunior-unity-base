@@ -40,6 +40,11 @@ namespace Platformer.Attributes
 
         public bool IsDied => CurrentValue == 0;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         public void Initialize()
         {
             _damageSpecification = new IntGreatOrEqualZeroSpecification();
@@ -51,8 +56,6 @@ namespace Platformer.Attributes
 
         public void TakeDamage(int damage)
         {
-            ValidateInitialization();
-
             if (IsDied)
                 return;
 
@@ -73,8 +76,6 @@ namespace Platformer.Attributes
 
         public void Heal(int value)
         {
-            ValidateInitialization();
-
             if (_damageSpecification.IsSatisfiedBy(value) == false)
                 throw new Exception("Heal value does not match specification");
 

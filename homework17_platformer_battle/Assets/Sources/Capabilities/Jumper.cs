@@ -38,19 +38,19 @@ namespace Platformer.Capabilities
 
         public bool IsDoubleJumped => _jumpPhase >= DoubleJumpMinPhase;
 
-        private void OnEnable()
+        private void Awake()
         {
             ValidateInitialization();
+        }
 
+        private void OnEnable()
+        {
             _inputReceiver.Jumped += OnJump;
             _inputReceiver.JumpEnded += OnJumpEnd;
         }
 
         private void OnDisable()
         {
-
-            ValidateInitialization();
-
             _inputReceiver.Jumped -= OnJump;
             _inputReceiver.JumpEnded -= OnJumpEnd;
         }
@@ -59,6 +59,7 @@ namespace Platformer.Capabilities
         {
             _jumpPhase = 0;
         }
+
         public void Initialize(InputReceiver inputReceiver)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -70,8 +71,6 @@ namespace Platformer.Capabilities
 
         public void StartJumpBehaviour()
         {
-            ValidateInitialization();
-
             _onGround = _collisionsDataRetriever.OnGround;
 
             UpdateVelocityCache();

@@ -16,6 +16,11 @@ namespace Platformer.Effects
         private Color _defaultColor;
         private bool _isInitialized;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         public void Initialize()
         {
             _renderer = GetComponent<SpriteRenderer>();
@@ -26,7 +31,6 @@ namespace Platformer.Effects
 
         public void StartBlink()
         {
-            ValidateInitialization();
             StartCoroutine(nameof(StartBlinkCoroutine));
         }
 

@@ -36,6 +36,11 @@ namespace Platformer.Playing
         private Animator _animator;
         private bool _isInitialized;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void OnEnable()
         {
             _health.Damaged += OnPlayerDamage;
@@ -50,15 +55,11 @@ namespace Platformer.Playing
 
         private void Update()
         {
-            ValidateInitialization();
-
             _stateMachine.Update();
         }
 
         private void FixedUpdate()
         {
-            ValidateInitialization();
-
             _stateMachine.FixedUpdate();
         }
 

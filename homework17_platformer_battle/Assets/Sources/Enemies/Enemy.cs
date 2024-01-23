@@ -45,6 +45,11 @@ namespace Platformer.Enemies
 
         public EnemyView View => _view;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;

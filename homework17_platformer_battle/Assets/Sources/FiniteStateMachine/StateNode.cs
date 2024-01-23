@@ -14,7 +14,7 @@ namespace FiniteStateMachine
 
         public IState State { get; }
 
-        public HashSet<ITransition> Transitions { get; private set; }
+        private HashSet<ITransition> Transitions { get; set; }
 
         public void Update()
         {

@@ -26,17 +26,18 @@ namespace Platformer.Capabilities
 
         public bool IsMoved => Mathf.Approximately(_desiredVelocityX, 0) == false;
 
-        private void OnEnable()
+        private void Awake()
         {
             ValidateInitialization();
+        }
 
+        private void OnEnable()
+        {
             _inputReceiver.Moved += OnMove;
         }
 
         private void OnDisable()
         {
-            ValidateInitialization();
-
             _inputReceiver.Moved -= OnMove;
         }
 
@@ -51,8 +52,6 @@ namespace Platformer.Capabilities
 
         public void StartMoveBehaviour()
         {
-            ValidateInitialization();
-
             _velocity = _rigidbody.velocity;
             _acceleration = _collisionsDataRetriever.OnGround ? _maxAcceleration : _maxAirAcceleration;
             _maxSpeedChange = _acceleration * Time.deltaTime;

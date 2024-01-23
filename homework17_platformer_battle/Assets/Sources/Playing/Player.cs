@@ -10,6 +10,11 @@ namespace Platformer.Playing
 
         public Transform Transform => _transform;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void FixedUpdate()
         {
             ValidateInitialization();

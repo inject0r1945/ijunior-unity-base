@@ -11,6 +11,11 @@ namespace Platformer.Capabilities
         private bool _isInitialized;
         private Vector2 _velocity;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -20,8 +25,6 @@ namespace Platformer.Capabilities
 
         public void Make()
         {
-            ValidateInitialization();
-
             _velocity = _rigidbody.velocity;
             _velocity.y = 0;
             _rigidbody.velocity = _velocity;

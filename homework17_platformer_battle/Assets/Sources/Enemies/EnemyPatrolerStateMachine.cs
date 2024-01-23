@@ -21,6 +21,11 @@ namespace Platformer.Enemies
         private DieState _dieState;
         private bool _isInitialized;
 
+        private void Awake()
+        {
+            ValidateInitialization();
+        }
+
         private void OnEnable()
         {
             _enemyHealth.Damaged += OnEnemyDamage;
@@ -37,13 +42,11 @@ namespace Platformer.Enemies
 
         private void Update()
         {
-            ValidateInitialization();
             _stateMachine.Update();
         }
 
         private void FixedUpdate()
         {
-            ValidateInitialization();
             _stateMachine.FixedUpdate();
         }
 
@@ -53,6 +56,12 @@ namespace Platformer.Enemies
 
             InitializeStateMachine(enemy, enemyCollider, patrolPoints);
             _isInitialized = true;
+        }
+
+        private void ValidateInitialization()
+        {
+            if (_isInitialized == false)
+                throw new System.Exception($"{nameof(EnemyPatrolerStateMachine)} is not initialized");
         }
 
         private void OnEnemyDamage()
@@ -73,12 +82,6 @@ namespace Platformer.Enemies
         private void Die()
         {
             Destroy(gameObject);
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(EnemyPatrolerStateMachine)} is not initialized");
         }
 
         private void InitializeStateMachine(Enemy enemy, Collider2D enemyCollider, IEnumerable<Transform> patrolPoints)
