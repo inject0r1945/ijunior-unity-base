@@ -22,7 +22,7 @@ namespace Platformer.Capabilities
         private const int DoubleJumpMinPhase = 2;
         private Rigidbody2D _rigidbody;
         private CollisionsDataRetriever _collisionsDataRetriever;
-        private InputReceiver _inputReceiver;
+        private InputEventer _inputEventer;
         private bool _isInitialized;
         private bool _onGround;
         private Vector2 _velocityCache;
@@ -45,14 +45,14 @@ namespace Platformer.Capabilities
 
         private void OnEnable()
         {
-            _inputReceiver.Jumped += OnJump;
-            _inputReceiver.JumpEnded += OnJumpEnd;
+            _inputEventer.Jumped += OnJump;
+            _inputEventer.JumpEnded += OnJumpEnd;
         }
 
         private void OnDisable()
         {
-            _inputReceiver.Jumped -= OnJump;
-            _inputReceiver.JumpEnded -= OnJumpEnd;
+            _inputEventer.Jumped -= OnJump;
+            _inputEventer.JumpEnded -= OnJumpEnd;
         }
 
         private void Start()
@@ -60,11 +60,11 @@ namespace Platformer.Capabilities
             _jumpPhase = 0;
         }
 
-        public void Initialize(InputReceiver inputReceiver)
+        public void Initialize(InputEventer inputEventer)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
-            _inputReceiver = inputReceiver;
+            _inputEventer = inputEventer;
 
             _isInitialized = true;
         }

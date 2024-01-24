@@ -2,7 +2,7 @@ using System;
 
 namespace Platformer.Control
 {
-    public abstract class InputReceiver
+    public abstract class InputEventer
     {
         public event Action Jumped;
 

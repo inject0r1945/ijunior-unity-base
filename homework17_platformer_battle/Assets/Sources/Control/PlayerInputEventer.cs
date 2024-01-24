@@ -1,10 +1,9 @@
 using System;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Platformer.Control
 {
-    public class PlayerInputReceiver : InputReceiver, IDisposable
+    public class PlayerInputEventer : InputEventer, IDisposable
     {
         private const float NoMoveInputValue = 0;
 
@@ -12,7 +11,7 @@ namespace Platformer.Control
         private InputAction _jumpAction;
         private InputAction _moveAction;
 
-        public PlayerInputReceiver()
+        public PlayerInputEventer()
         {
             _jumpAction = _inputActions.Levels.Jump;
             _moveAction = _inputActions.Levels.Move;

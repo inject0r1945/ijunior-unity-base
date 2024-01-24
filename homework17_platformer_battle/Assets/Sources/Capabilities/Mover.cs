@@ -1,7 +1,6 @@
 using Platformer.Control;
 using Platformer.Core;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 
 namespace Platformer.Capabilities
@@ -15,7 +14,7 @@ namespace Platformer.Capabilities
         [SerializeField, MinValue(0), Required] private float _maxAirAcceleration = 20f;
 
         private CollisionsDataRetriever _collisionsDataRetriever;
-        private InputReceiver _inputReceiver;
+        private InputEventer _inputEventer;
         private bool _isInitialized;
         private Rigidbody2D _rigidbody;
         private Vector2 _velocity;
@@ -33,19 +32,19 @@ namespace Platformer.Capabilities
 
         private void OnEnable()
         {
-            _inputReceiver.Moved += OnMove;
+            _inputEventer.Moved += OnMove;
         }
 
         private void OnDisable()
         {
-            _inputReceiver.Moved -= OnMove;
+            _inputEventer.Moved -= OnMove;
         }
 
-        public void Initialize(InputReceiver inputReceiver)
+        public void Initialize(InputEventer inputEventer)
         {
             _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _inputReceiver = inputReceiver;
+            _inputEventer = inputEventer;
 
             _isInitialized = true;
         }

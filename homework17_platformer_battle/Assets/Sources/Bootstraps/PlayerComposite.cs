@@ -36,9 +36,9 @@ namespace Platformer.Bootstraps
             _playerFallSpeedLimiter.Initialize();
             _player.Initialize();
 
-            InputReceiver playerInputreceiver = new PlayerInputReceiver();
-            _playerMover.Initialize(playerInputreceiver);
-            _playerJumper.Initialize(playerInputreceiver);
+            InputEventer playerInputEventer = new PlayerInputEventer();
+            _playerMover.Initialize(playerInputEventer);
+            _playerJumper.Initialize(playerInputEventer);
 
             _playerStateMachine.Initialize();
         }
