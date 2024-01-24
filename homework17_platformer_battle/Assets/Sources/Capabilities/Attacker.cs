@@ -13,6 +13,7 @@ namespace Platformer.Capabilities
         private const float UpNormalThreshold = 1;
         private IDamageable[] _damageables;
 
+        [FoldoutGroup("Events")]
         public UnityEvent Attacked;
 
         private void OnCollisionEnter2D(Collision2D collision)

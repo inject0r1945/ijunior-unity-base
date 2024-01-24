@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Platformer.Capabilities
@@ -5,7 +6,7 @@ namespace Platformer.Capabilities
     [RequireComponent(typeof(Rigidbody2D))]
     public class Rebound : MonoBehaviour
     {
-        [SerializeField] private float _force;
+        [SerializeField, Required, MinValue(0)] private float _force;
 
         private Rigidbody2D _rigidbody;
         private bool _isInitialized;
