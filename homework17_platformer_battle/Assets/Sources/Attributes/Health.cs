@@ -1,3 +1,4 @@
+using HealthVisualization;
 using Sirenix.OdinInspector;
 using Specifications;
 using System;
@@ -5,9 +6,9 @@ using UnityEngine;
 
 namespace Platformer.Attributes
 {
-    public class Health : MonoBehaviour, IDamageable, IHealing
+    public class Health : MonoBehaviour, IDamageable, IHealing, IHealth<int>
     {
-        [SerializeField, Required, MinValue(0)] private int _startValue = 3;
+        [SerializeField, Required, MinValue(0)] private int _maxValue = 3;
 
         private const int MinValue = 0;
         private int _currentValue;
@@ -24,6 +25,8 @@ namespace Platformer.Attributes
 
         public event Action Healed;
 
+        public int MaxValue => _maxValue;
+
         [ShowInInspector, ReadOnly]
         public int CurrentValue
         {
@@ -35,8 +38,13 @@ namespace Platformer.Attributes
 
                 if (!_healthSpecification.IsSatisfiedBy(_currentValue))
                     _currentValue = MinValue;
+
+                if (_currentValue > MaxValue)
+                    _currentValue = MaxValue;
             }
         }
+
+        public float Percent => CurrentValue / (float)MaxValue;
 
         public bool IsDied => CurrentValue == 0;
 
@@ -50,7 +58,7 @@ namespace Platformer.Attributes
             _damageSpecification = new IntGreatOrEqualZeroSpecification();
             _healthSpecification = new IntGreatOrEqualZeroSpecification();
 
-            CurrentValue = _startValue;
+            CurrentValue = _maxValue;
             _isInitialized = true;
         }
 
