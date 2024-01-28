@@ -1,3 +1,4 @@
+using MonoUtils;
 using Platformer.Control;
 using Platformer.Core;
 using Sirenix.OdinInspector;
@@ -7,7 +8,7 @@ namespace Platformer.Capabilities
 {
     [RequireComponent(typeof(CollisionsDataRetriever))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Mover : MonoBehaviour
+    public class Mover : InitializedMonobehaviour
     {
         [SerializeField, MinValue(0), Required] private float _maxSpeed = 7f;
         [SerializeField, MinValue(0), Required] private float _maxAcceleration = 40f;
@@ -15,7 +16,6 @@ namespace Platformer.Capabilities
 
         private CollisionsDataRetriever _collisionsDataRetriever;
         private InputEventer _inputEventer;
-        private bool _isInitialized;
         private Rigidbody2D _rigidbody;
         private Vector2 _velocity;
         private float _directionX;
@@ -24,11 +24,6 @@ namespace Platformer.Capabilities
         private float _acceleration;
 
         public bool IsMoved => Mathf.Approximately(_desiredVelocityX, 0) == false;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void OnEnable()
         {
@@ -46,7 +41,7 @@ namespace Platformer.Capabilities
             _rigidbody = GetComponent<Rigidbody2D>();
             _inputEventer = inputEventer;
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public void StartMoveBehaviour()
@@ -56,12 +51,6 @@ namespace Platformer.Capabilities
             _maxSpeedChange = _acceleration * Time.deltaTime;
             _velocity.x = Mathf.MoveTowards(_velocity.x, _desiredVelocityX, _maxSpeedChange);
             _rigidbody.velocity = _velocity;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(Mover)} is not initialized");
         }
 
         private void OnMove(float directionX)

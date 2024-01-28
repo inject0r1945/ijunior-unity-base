@@ -1,3 +1,4 @@
+using MonoUtils;
 using Platformer.Control;
 using Platformer.Core;
 using Sirenix.OdinInspector;
@@ -8,7 +9,7 @@ namespace Platformer.Capabilities
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionsDataRetriever))]
-    public class Jumper : MonoBehaviour
+    public class Jumper : InitializedMonobehaviour
     {
         [SerializeField, MinValue(0), Required] private float _jumpHeight = 3f;
         [SerializeField, MinValue(0), Required] private float _upwardGravityScale = 3f;
@@ -23,7 +24,6 @@ namespace Platformer.Capabilities
         private Rigidbody2D _rigidbody;
         private CollisionsDataRetriever _collisionsDataRetriever;
         private InputEventer _inputEventer;
-        private bool _isInitialized;
         private bool _onGround;
         private Vector2 _velocityCache;
         private int _jumpPhase;
@@ -37,11 +37,6 @@ namespace Platformer.Capabilities
         public bool IsJumped => _jumpPhase > 0;
 
         public bool IsDoubleJumped => _jumpPhase >= DoubleJumpMinPhase;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void OnEnable()
         {
@@ -66,7 +61,7 @@ namespace Platformer.Capabilities
             _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
             _inputEventer = inputEventer;
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public void StartJumpBehaviour()
@@ -86,12 +81,6 @@ namespace Platformer.Capabilities
 
             HandleJumpInput();
             HandleJumpHoldInput();
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new Exception($"{nameof(Jumper)} is not initialized");
         }
 
         private void OnJump()

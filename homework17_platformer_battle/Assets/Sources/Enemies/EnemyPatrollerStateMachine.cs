@@ -1,5 +1,6 @@
 using FiniteStateMachine;
 using FiniteStateMachine.States;
+using MonoUtils;
 using Platformer.Attributes;
 using Platformer.Core;
 using Platformer.Enemies.States;
@@ -9,22 +10,15 @@ using UnityEngine;
 
 namespace Platformer.Enemies
 {
-    public class EnemyPatrolerStateMachine : MonoBehaviour
+    public class EnemyPatrollerStateMachine : InitializedMonobehaviour
     {
         [SerializeField, Required, ChildGameObjectsOnly] private AudioSource _hitAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private AudioSource _dieAudio;
 
         private StateMachine _stateMachine = new();
         private Health _enemyHealth;
-        private Collider2D _enemyCollider;
         private IState _hitState;
         private DieState _dieState;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void OnEnable()
         {
@@ -55,13 +49,7 @@ namespace Platformer.Enemies
             _enemyHealth = enemyHealth;
 
             InitializeStateMachine(enemy, enemyCollider, patrolPoints);
-            _isInitialized = true;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(EnemyPatrolerStateMachine)} is not initialized");
+            IsInitialized = true;
         }
 
         private void OnEnemyDamage()

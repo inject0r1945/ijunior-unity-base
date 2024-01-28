@@ -1,3 +1,4 @@
+using MonoUtils;
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace Platformer.Effects
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class Blink : MonoBehaviour
+    public class Blink : InitializedMonobehaviour
     {
         [SerializeField] private Color _blinkColor = Color.white;
         [SerializeField, Required, MinValue(0)] private float _time = 1;
@@ -14,30 +15,18 @@ namespace Platformer.Effects
         private readonly float _sinusShift = 0.5f;
         private Renderer _renderer;
         private Color _defaultColor;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         public void Initialize()
         {
             _renderer = GetComponent<SpriteRenderer>();
             _defaultColor = _renderer.material.color;
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public void StartBlink()
         {
             StartCoroutine(nameof(StartBlinkCoroutine));
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(Blink)} is not initialized");
         }
 
         private IEnumerator StartBlinkCoroutine()

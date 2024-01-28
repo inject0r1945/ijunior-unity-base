@@ -1,25 +1,19 @@
+using MonoUtils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Platformer.Capabilities
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class FallSpeedLimiter : MonoBehaviour
+    public class FallSpeedLimiter : InitializedMonobehaviour
     {
         [SerializeField, Required, MinValue(0)] private float _maxFallSpeed = 10f;
 
         private Rigidbody2D _rigidbody;
         private Vector2 _constraintedVelocity;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void FixedUpdate()
         {
-            ValidateInitialization();
             StartFallSpeedLimitBehaviour();
         }
 
@@ -28,7 +22,7 @@ namespace Platformer.Capabilities
             _rigidbody = GetComponent<Rigidbody2D>();
             _constraintedVelocity = new Vector2();
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         private void StartFallSpeedLimitBehaviour()
@@ -40,12 +34,6 @@ namespace Platformer.Capabilities
 
                 _rigidbody.velocity = _constraintedVelocity;
             }
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(Rebound)} is not initialized");
         }
     }
 }

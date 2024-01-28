@@ -1,10 +1,11 @@
+using MonoUtils;
 using UnityEngine;
 
 namespace Platformer.Core
 {
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class SpriteFlipper : MonoBehaviour
+    public class SpriteFlipper : InitializedMonobehaviour
     {
         [SerializeField] private float _zeroSpeedThreshold = 0.02f;
         [SerializeField] private bool _isInverted;
@@ -12,12 +13,6 @@ namespace Platformer.Core
         private IVelocity _velocity;
         private SpriteRenderer _spriteRenderer;
         private float _speedX;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void Update()
         {
@@ -37,13 +32,7 @@ namespace Platformer.Core
             _velocity = velocity;
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
-            _isInitialized = true;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(SpriteFlipper)} is not initialized");
+            IsInitialized = true;
         }
     }
 }

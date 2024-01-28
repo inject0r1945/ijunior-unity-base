@@ -1,3 +1,4 @@
+using MonoUtils;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +6,13 @@ using UnityEngine;
 namespace Platformer.Core
 {
     [RequireComponent(typeof(PointsInitializer))]
-    public class RandomPointsSpawner : MonoBehaviour
+    public class RandomPointsSpawner : InitializedMonobehaviour
     {
         [SerializeField, Required, AssetsOnly] private GameObject _prefab;
         [SerializeField, Required, MinValue(0)] private int _spawnCount;
 
         private PointsInitializer _pointsInitializer;
         private List<Transform> _spawnPoints;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void Start()
         {
@@ -33,13 +28,7 @@ namespace Platformer.Core
             if (_spawnCount > _spawnPoints.Count)
                 _spawnCount = _spawnPoints.Count;
 
-            _isInitialized = true;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(RandomPointsSpawner)} is not initialized");
+            IsInitialized = true;
         }
 
         private void Spawn()

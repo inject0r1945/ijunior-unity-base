@@ -1,27 +1,21 @@
+using MonoUtils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Platformer.Capabilities
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Rebound : MonoBehaviour
+    public class Rebound : InitializedMonobehaviour
     {
         [SerializeField, Required, MinValue(0)] private float _force;
 
         private Rigidbody2D _rigidbody;
-        private bool _isInitialized;
         private Vector2 _velocity;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public void Make()
@@ -30,12 +24,6 @@ namespace Platformer.Capabilities
             _velocity.y = 0;
             _rigidbody.velocity = _velocity;
             _rigidbody.AddForce(Vector2.up * _force, ForceMode2D.Impulse);
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(Rebound)} is not initialized");
         }
     }
 }

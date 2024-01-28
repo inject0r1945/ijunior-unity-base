@@ -1,3 +1,4 @@
+using HealthVisualization.Integer;
 using Platformer.Attributes;
 using Platformer.Capabilities;
 using Platformer.Control;
@@ -23,6 +24,7 @@ namespace Platformer.Bootstraps
         [SerializeField, Required] private SpriteFlipper _playerSpriteFlipper;
         [SerializeField, Required] private Rebound _playerRebound;
         [SerializeField, Required] private HealthEventer _playerHealthEventer;
+        [SerializeField, Required] private IntSmoothHealthBar _healthBar;
 
 
         public override void Initialize()
@@ -41,6 +43,9 @@ namespace Platformer.Bootstraps
             _playerJumper.Initialize(playerInputEventer);
 
             _playerStateMachine.Initialize();
+
+            IntHealthMediator healthMediator = new(_playerHealth);
+            _healthBar.Initialize(healthMediator);
         }
     }
 }

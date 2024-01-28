@@ -21,8 +21,6 @@ namespace HealthVisualization
         public void Initialize(HealthMediator<T> healthMediator)
         {
             HealthMediator = healthMediator;
-            UpdateHealthVisualization();
-
             IsInitialized = true;
         }
 

@@ -20,7 +20,7 @@ namespace DemoUIHealthBars
         private void Initialize()
         {
             _health.Initialize();
-            IntegerHealthMediator healthMediator = new IntegerHealthMediator(_health);
+            IntHealthMediator healthMediator = new IntHealthMediator(_health);
             _textHealthIndicator.Initialize(healthMediator);
             _healthBar.Initialize(healthMediator);
             _smoothHealthBar.Initialize(healthMediator);

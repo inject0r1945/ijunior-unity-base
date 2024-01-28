@@ -1,4 +1,5 @@
 using HealthVisualization;
+using MonoUtils;
 using Sirenix.OdinInspector;
 using Specifications;
 using System;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Platformer.Attributes
 {
-    public class Health : MonoBehaviour, IDamageable, IHealing, IHealth<int>
+    public class Health : InitializedMonobehaviour, IDamageable, IHealing, IHealth<int>
     {
         [SerializeField, Required, MinValue(0)] private int _maxValue = 3;
 
@@ -15,7 +16,6 @@ namespace Platformer.Attributes
         private bool _isEnableDamage = true;
         private ISpecification<int> _damageSpecification;
         private ISpecification<int> _healthSpecification;
-        private bool _isInitialized;
 
         public event Action Damaged;
 
@@ -48,9 +48,9 @@ namespace Platformer.Attributes
 
         public bool IsDied => CurrentValue == 0;
 
-        private void Awake()
+        private void Start()
         {
-            ValidateInitialization();
+            SendChangeEvent();
         }
 
         public void Initialize()
@@ -59,7 +59,8 @@ namespace Platformer.Attributes
             _healthSpecification = new IntGreatOrEqualZeroSpecification();
 
             CurrentValue = _maxValue;
-            _isInitialized = true;
+
+            IsInitialized = true;
         }
 
         public void TakeDamage(int damage)
@@ -75,7 +76,7 @@ namespace Platformer.Attributes
 
             CurrentValue -= damage;
 
-            Changed?.Invoke(CurrentValue);
+            SendChangeEvent();
             Damaged?.Invoke();
 
             if (CurrentValue == 0)
@@ -89,7 +90,7 @@ namespace Platformer.Attributes
 
             CurrentValue += value;
 
-            Changed?.Invoke(CurrentValue);
+            SendChangeEvent();
             Healed?.Invoke();
         }
 
@@ -103,10 +104,9 @@ namespace Platformer.Attributes
             _isEnableDamage = false;
         }
 
-        private void ValidateInitialization()
+        private void SendChangeEvent()
         {
-            if (_isInitialized == false)
-                throw new Exception($"{nameof(Health)} is not initialized");
+            Changed?.Invoke(CurrentValue);
         }
     }
 }

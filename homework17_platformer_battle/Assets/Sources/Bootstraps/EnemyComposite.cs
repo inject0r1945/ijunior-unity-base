@@ -1,3 +1,4 @@
+using HealthVisualization.Integer;
 using Pathfinding;
 using Platformer.Attributes;
 using Platformer.Control;
@@ -11,21 +12,25 @@ namespace Platformer.Bootstraps
     public class EnemyComposite : Composite
     {
         [SerializeField, Required] private Enemy _enemy;
-        [SerializeField, Required] private Collider2D _enemyCollider;
-        [SerializeField, Required] private AIPath _enemyAIPath;
-        [SerializeField, Required] private Animator _enemyAnimator;
-        [SerializeField, Required] private SpriteFlipper _enemySpriteFlipper;
-        [SerializeField, Required] private EnemyPatrolerStateMachine _enemyStateMachine;
+        [SerializeField, Required] private Collider2D _collider;
+        [SerializeField, Required] private AIPath _aiPath;
+        [SerializeField, Required] private Animator _animator;
+        [SerializeField, Required] private SpriteFlipper _spriteFlipper;
+        [SerializeField, Required] private EnemyPatrollerStateMachine _patrollerStateMachine;
         [SerializeField, Required] private PointsInitializer _patrolPointsInitializer;
-        [SerializeField, Required] private Health _enemyHealth;
+        [SerializeField, Required] private Health _health;
+        [SerializeField, Required] private IntSmoothHealthBar _healthbar;
 
         public override void Initialize()
         {
             _enemy.Initialize();
-            _enemyHealth.Initialize();
-            _enemySpriteFlipper.Initialize(new AIVelocity(_enemyAIPath));
+            _health.Initialize();
+            _spriteFlipper.Initialize(new AIVelocity(_aiPath));
             _patrolPointsInitializer.Initialize();
-            _enemyStateMachine.Initialize(_enemy, _enemyHealth, _enemyCollider, _patrolPointsInitializer.Points);
+            _patrollerStateMachine.Initialize(_enemy, _health, _collider, _patrolPointsInitializer.Points);
+
+            IntHealthMediator healthMediator = new(_health);
+            _healthbar.Initialize(healthMediator);
         }
     }
 }

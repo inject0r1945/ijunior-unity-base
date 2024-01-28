@@ -13,8 +13,17 @@ namespace HealthVisualization
 
         private Coroutine _healthbarCoroutine;
 
+        private void OnDisable()
+        {
+            if (_healthbarCoroutine != null)
+                StopCoroutine(_healthbarCoroutine);
+        }
+
         protected override void UpdateHealthVisualization()
         {
+            if (enabled == false)
+                return;
+
             if (_healthbarCoroutine != null)
                 StopCoroutine(_healthbarCoroutine);
 

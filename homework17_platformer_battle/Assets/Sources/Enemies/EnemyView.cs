@@ -1,11 +1,12 @@
 using UnityEngine;
 using Platformer.Core;
 using Sirenix.OdinInspector;
+using MonoUtils;
 
 namespace Platformer.Enemies
 {
    [RequireComponent(typeof(Animator))]
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : InitializedMonobehaviour
     {
         [SerializeField, Required, AssetsOnly] private AnimatorOverrideController _animatorOverrider;
 
@@ -23,12 +24,6 @@ namespace Platformer.Enemies
         private int _dieAnimationTriggerHash;
         private int _hitAnimationTriggerHash;
         private Animator _animator;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         public void Initialize()
         {
@@ -41,7 +36,7 @@ namespace Platformer.Enemies
             _hitAnimationTriggerHash = Animator.StringToHash(_hitAnimationTrigger);
             _dieAnimationTriggerHash = Animator.StringToHash(_dieAnimationTrigger);
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public void PlayIdleAnimation()
@@ -87,12 +82,6 @@ namespace Platformer.Enemies
         public bool IsPlayingDieAnimation()
         {
             return _animator.IsPlayedAnimation(_dieAnimationName, _animationLayerIndex, _dieAnimationTriggerHash);
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(EnemyView)} is not initialized");
         }
 
         private void SetTrigger(int triggerHash)

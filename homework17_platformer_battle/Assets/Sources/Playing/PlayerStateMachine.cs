@@ -1,5 +1,6 @@
 using FiniteStateMachine;
 using FiniteStateMachine.States;
+using MonoUtils;
 using Platformer.Attributes;
 using Platformer.Capabilities;
 using Platformer.Effects;
@@ -15,7 +16,7 @@ namespace Platformer.Playing
     [RequireComponent(typeof(PlayerView))]
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Blink))]
-    public class PlayerStateMachine : MonoBehaviour
+    public class PlayerStateMachine : InitializedMonobehaviour
     {
         [SerializeField, Required, ChildGameObjectsOnly] private AudioSource _hitSound;
 
@@ -34,12 +35,6 @@ namespace Platformer.Playing
         private Mover _mover;
         private Jumper _jumper;
         private Animator _animator;
-        private bool _isInitialized;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void OnEnable()
         {
@@ -85,13 +80,7 @@ namespace Platformer.Playing
 
             SetupStateMachine();
 
-            _isInitialized = true;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new System.Exception($"{nameof(PlayerStateMachine)} is not initialized");
+            IsInitialized = true;
         }
 
         private void SetupStateMachine()

@@ -1,14 +1,12 @@
-using System;
+using MonoUtils;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Platformer.Attributes
 {
     [RequireComponent(typeof(Health))]
-    public class HealthEventer : MonoBehaviour
+    public class HealthEventer : InitializedMonobehaviour
     {
-        private bool _isInitialized;
-
         private Health _health;
 
         public UnityEvent Heal;
@@ -18,11 +16,6 @@ namespace Platformer.Attributes
         public UnityEvent Damaged;
 
         public UnityEvent<int> Changed;
-
-        private void Awake()
-        {
-            ValidateInitialization();
-        }
 
         private void OnEnable()
         {
@@ -43,13 +36,7 @@ namespace Platformer.Attributes
         public void Initialize()
         {
             _health = GetComponent<Health>();
-            _isInitialized = true;
-        }
-
-        private void ValidateInitialization()
-        {
-            if (_isInitialized == false)
-                throw new Exception($"{nameof(HealthEventer)} is not initialized");
+            IsInitialized = true;
         }
 
         private void OnHeal()
