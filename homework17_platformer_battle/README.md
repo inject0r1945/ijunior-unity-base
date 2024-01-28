@@ -6,4 +6,4 @@
 
 Демонстрация результата:
 
-https://www.youtube.com/watch?v=CYnMnARgOnU
+https://www.youtube.com/watch?v=iwgoTVJTmxk
