@@ -17,6 +17,7 @@ namespace Platformer.Enemies
 
         [Title("Player Detection Settings")]
         [SerializeField, Required, MinValue(0)] private float _playerDetectionRadius = 1f;
+        [SerializeField] private LayerMask _detectionlayers = ~0;
 
         [Title("Attack Settings")]
         [SerializeField, Required, MinValue(0)] private float _attackDistance = 1f;
@@ -30,6 +31,8 @@ namespace Platformer.Enemies
         public float DetectionRadius => _playerDetectionRadius;
 
         public Transform Transform => _transform;
+
+        public LayerMask DetectionLayers => _detectionlayers;
 
         public AIPath Pathfinder => _pathfinder;
 

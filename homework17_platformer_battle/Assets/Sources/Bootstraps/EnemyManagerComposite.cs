@@ -1,4 +1,4 @@
-using UnityEngine;
+using Zenject;
 
 namespace Platformer.Bootstraps
 {
@@ -6,6 +6,7 @@ namespace Platformer.Bootstraps
     {
         private EnemyComposite[] _enemiesComposites;
 
+        [Inject]
         public override void Initialize()
         {
             _enemiesComposites = GetComponentsInChildren<EnemyComposite>();

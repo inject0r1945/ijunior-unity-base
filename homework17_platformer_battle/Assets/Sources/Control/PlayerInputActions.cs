@@ -44,6 +44,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Vampirism"",
+                    ""type"": ""Button"",
+                    ""id"": ""243ad109-ba5c-4307-aff2-6d142a9b86dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +132,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""462293f5-d1aa-404d-b592-79f17192cf14"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vampirism"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +153,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Levels = asset.FindActionMap("Levels", throwIfNotFound: true);
         m_Levels_Jump = m_Levels.FindAction("Jump", throwIfNotFound: true);
         m_Levels_Move = m_Levels.FindAction("Move", throwIfNotFound: true);
+        m_Levels_Vampirism = m_Levels.FindAction("Vampirism", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,12 +217,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<ILevelsActions> m_LevelsActionsCallbackInterfaces = new List<ILevelsActions>();
     private readonly InputAction m_Levels_Jump;
     private readonly InputAction m_Levels_Move;
+    private readonly InputAction m_Levels_Vampirism;
     public struct LevelsActions
     {
         private @PlayerInputActions m_Wrapper;
         public LevelsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Levels_Jump;
         public InputAction @Move => m_Wrapper.m_Levels_Move;
+        public InputAction @Vampirism => m_Wrapper.m_Levels_Vampirism;
         public InputActionMap Get() { return m_Wrapper.m_Levels; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -217,6 +240,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Vampirism.started += instance.OnVampirism;
+            @Vampirism.performed += instance.OnVampirism;
+            @Vampirism.canceled += instance.OnVampirism;
         }
 
         private void UnregisterCallbacks(ILevelsActions instance)
@@ -227,6 +253,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Vampirism.started -= instance.OnVampirism;
+            @Vampirism.performed -= instance.OnVampirism;
+            @Vampirism.canceled -= instance.OnVampirism;
         }
 
         public void RemoveCallbacks(ILevelsActions instance)
@@ -248,5 +277,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnVampirism(InputAction.CallbackContext context);
     }
 }

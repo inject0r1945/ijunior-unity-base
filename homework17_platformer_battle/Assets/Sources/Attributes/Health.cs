@@ -74,6 +74,9 @@ namespace Platformer.Attributes
             if (_damageSpecification.IsSatisfiedBy(damage) == false)
                 throw new Exception("Damage value does not match specification");
 
+            if (damage == 0)
+                return;
+
             CurrentValue -= damage;
 
             SendChangeEvent();

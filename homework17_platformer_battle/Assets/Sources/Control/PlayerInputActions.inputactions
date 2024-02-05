@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Vampirism",
+                    "type": "Button",
+                    "id": "243ad109-ba5c-4307-aff2-6d142a9b86dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -101,6 +110,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "462293f5-d1aa-404d-b592-79f17192cf14",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vampirism",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

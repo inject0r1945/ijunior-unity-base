@@ -7,5 +7,7 @@ namespace Platformer.Core
         public float DetectionRadius { get; }
 
         public Transform Transform { get; }
+
+        public LayerMask DetectionLayers { get; }
     }
 }

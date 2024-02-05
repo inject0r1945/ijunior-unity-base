@@ -3,6 +3,7 @@ using Platformer.Control;
 using Platformer.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace Platformer.Capabilities
 {
@@ -25,6 +26,16 @@ namespace Platformer.Capabilities
 
         public bool IsMoved => Mathf.Approximately(_desiredVelocityX, 0) == false;
 
+        [Inject]
+        private void Construct(InputEventer inputEventer)
+        {
+            _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _inputEventer = inputEventer;
+
+            IsInitialized = true;
+        }
+
         private void OnEnable()
         {
             _inputEventer.Moved += OnMove;
@@ -33,15 +44,6 @@ namespace Platformer.Capabilities
         private void OnDisable()
         {
             _inputEventer.Moved -= OnMove;
-        }
-
-        public void Initialize(InputEventer inputEventer)
-        {
-            _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _inputEventer = inputEventer;
-
-            IsInitialized = true;
         }
 
         public void StartMoveBehaviour()

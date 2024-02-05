@@ -27,10 +27,10 @@ namespace Platformer.Attributes
 
         private void OnDisable()
         {
-            _health.Died -= OnDie;
-            _health.Damaged -= OnDamage;
-            _health.Changed -= OnChanged;
-            _health.Healed -= OnHeal;
+            _health.Died += OnDie;
+            _health.Damaged += OnDamage;
+            _health.Changed += OnChanged;
+            _health.Healed += OnHeal;
         }
 
         public void Initialize()

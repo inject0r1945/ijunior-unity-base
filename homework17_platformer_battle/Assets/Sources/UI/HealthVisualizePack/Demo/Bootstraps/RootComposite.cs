@@ -12,6 +12,8 @@ namespace DemoUIHealthBars
         [SerializeField, Required] private IntHealthBar _healthBar;
         [SerializeField, Required] private IntSmoothHealthBar _smoothHealthBar;
 
+        private IntHealthMediator _healthMediator;
+
         private void Awake()
         {
             Initialize();
@@ -20,10 +22,16 @@ namespace DemoUIHealthBars
         private void Initialize()
         {
             _health.Initialize();
-            IntHealthMediator healthMediator = new IntHealthMediator(_health);
-            _textHealthIndicator.Initialize(healthMediator);
-            _healthBar.Initialize(healthMediator);
-            _smoothHealthBar.Initialize(healthMediator);
+            _healthMediator = new IntHealthMediator(_health);
+
+            _textHealthIndicator.Initialize(_healthMediator);
+            _healthBar.Initialize(_healthMediator);
+            _smoothHealthBar.Initialize(_healthMediator);
+        }
+
+        private void OnDestroy()
+        {
+            _healthMediator.Dispose();
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Platformer.Playing
         public void Initialize()
         {
             _transform = transform;
-
             IsInitialized = true;
         }
     }

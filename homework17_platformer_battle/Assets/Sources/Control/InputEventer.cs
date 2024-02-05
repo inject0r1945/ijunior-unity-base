@@ -10,6 +10,8 @@ namespace Platformer.Control
 
         public event Action<float> Moved;
 
+        public event Action VampirismEnabled;
+
         protected void SendJumpEvent()
         {
             Jumped?.Invoke();
@@ -23,6 +25,11 @@ namespace Platformer.Control
         protected void SendMoveEvent(float moveValue)
         {
             Moved?.Invoke(moveValue);
+        }
+
+        protected void SendVampirismEnabledEvent()
+        {
+            VampirismEnabled?.Invoke();
         }
     }
 }

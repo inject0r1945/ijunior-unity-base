@@ -4,6 +4,7 @@ using Platformer.Core;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Platformer.Capabilities
 {
@@ -38,6 +39,16 @@ namespace Platformer.Capabilities
 
         public bool IsDoubleJumped => _jumpPhase >= DoubleJumpMinPhase;
 
+        [Inject]
+        private void Construct(InputEventer inputEventer)
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
+            _inputEventer = inputEventer;
+
+            IsInitialized = true;
+        }
+
         private void OnEnable()
         {
             _inputEventer.Jumped += OnJump;
@@ -53,15 +64,6 @@ namespace Platformer.Capabilities
         private void Start()
         {
             _jumpPhase = 0;
-        }
-
-        public void Initialize(InputEventer inputEventer)
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _collisionsDataRetriever = GetComponent<CollisionsDataRetriever>();
-            _inputEventer = inputEventer;
-
-            IsInitialized = true;
         }
 
         public void StartJumpBehaviour()

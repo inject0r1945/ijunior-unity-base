@@ -2,11 +2,12 @@ using MonoUtils;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Platformer.Core
 {
     [RequireComponent(typeof(PointsInitializer))]
-    public class RandomPointsSpawner : InitializedMonobehaviour
+    public class RandomPointsSpawner : InitializedMonobehaviour, IInitializable
     {
         [SerializeField, Required, AssetsOnly] private GameObject _prefab;
         [SerializeField, Required, MinValue(0)] private int _spawnCount;
@@ -19,6 +20,7 @@ namespace Platformer.Core
             Spawn();
         }
 
+        [Inject]
         public void Initialize()
         {
             _pointsInitializer = GetComponent<PointsInitializer>();

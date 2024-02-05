@@ -10,11 +10,13 @@ namespace Platformer.Control
         private PlayerInputActions _inputActions = new();
         private InputAction _jumpAction;
         private InputAction _moveAction;
+        private InputAction _vampirismAction;
 
         public PlayerInputEventer()
         {
             _jumpAction = _inputActions.Levels.Jump;
             _moveAction = _inputActions.Levels.Move;
+            _vampirismAction = _inputActions.Levels.Vampirism;
 
             Enable();
         }
@@ -44,6 +46,7 @@ namespace Platformer.Control
             _moveAction.started += OnMove;
             _moveAction.canceled += OnMoveCanceled;
             _moveAction.performed += OnMove;
+            _vampirismAction.performed += OnVampirismPerformed;
         }
 
         private void OnJumpStart(InputAction.CallbackContext context)
@@ -66,6 +69,11 @@ namespace Platformer.Control
             SendMoveEvent(NoMoveInputValue);
         }
 
+        private void OnVampirismPerformed(InputAction.CallbackContext obj)
+        {
+            SendVampirismEnabledEvent();
+        }
+
         private void Unsubscribe()
         {
             _jumpAction.started -= OnJumpStart;
@@ -74,6 +82,7 @@ namespace Platformer.Control
             _moveAction.started -= OnMove;
             _moveAction.canceled -= OnMoveCanceled;
             _moveAction.performed -= OnMove;
+            _vampirismAction.performed -= OnVampirismPerformed;
         }
     }
 }

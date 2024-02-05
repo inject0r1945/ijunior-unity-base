@@ -50,6 +50,7 @@ MonoBehaviour:
   _playerMover: {fileID: 1416110251}
   _playerJumper: {fileID: 1416110260}
   _playerHealth: {fileID: 2103066674}
+  _playerVampirizm: {fileID: 7553917447868734383}
   _playerFallSpeedLimiter: {fileID: 2103066679}
   _playerBlink: {fileID: 2336480113334195793}
   _playerStateMachine: {fileID: 5398494091357682599}
@@ -84,6 +85,8 @@ GameObject:
   - component: {fileID: 1895817383480981198}
   - component: {fileID: 4124808248909593041}
   - component: {fileID: 4256164544243236607}
+  - component: {fileID: 4246968675032261924}
+  - component: {fileID: 7553917447868734383}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -253,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190be7b2c100c4e44977e7b0e379fa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _composite: {fileID: 1954359231297456003}
 --- !u!114 &1416110242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +472,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26519b04d3921443aacf70a51d38508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4246968675032261924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649682552632906264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59d29f941c4ae049a696f16a865617c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healSize: 1
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 503
+  Healed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7553917447868734383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649682552632906264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b014c961928d39c4cb9e5e5eb94909b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 5
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _oneSuckHealthSize: 1
+  _suckDelay: 2
+  _maxDuration: 6
+  _fullRecoveryTime: 30
 --- !u!1 &2232841645411387113
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace Platformer.Playing
 {
-
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Jumper))]
     [RequireComponent(typeof(PlayerView))]
@@ -34,7 +33,6 @@ namespace Platformer.Playing
         private Blink _playerBlink;
         private Mover _mover;
         private Jumper _jumper;
-        private Animator _animator;
 
         private void OnEnable()
         {
@@ -68,7 +66,6 @@ namespace Platformer.Playing
             _jumper = GetComponent<Jumper>();
             _stateMachine = new StateMachine();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
 
             _idleState = new IdleState(_playerView, _mover, _jumper);
             _runState = new RunState(_playerView, _mover, _jumper);
