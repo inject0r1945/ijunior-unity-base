@@ -100,6 +100,9 @@ namespace Platformer.Capabilities
 
         private void StartRecoveryBehaviour()
         {
+            if (_state == State.Stopped)
+                return;
+
             if (_state == State.Recovering)
             {
                 if (_recoveryTimer == 0)

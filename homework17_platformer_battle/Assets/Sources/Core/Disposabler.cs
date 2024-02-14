@@ -19,10 +19,5 @@ namespace Platformer.Core
         {
             _disposableObjects.Add(disposable);
         }
-
-        public void Remove(IDisposable disposable)
-        {
-            _disposableObjects.Remove(disposable);
-        }
     }
 }
