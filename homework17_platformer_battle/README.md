@@ -5,5 +5,6 @@
 А игрок может лечиться, подбирая аптечки, которые случайным образом разбросаны по уровню.
 
 Демонстрация результата:
+https://www.youtube.com/watch?v=0KlrQZcMUwE
 
-https://www.youtube.com/watch?v=iwgoTVJTmxk
+
